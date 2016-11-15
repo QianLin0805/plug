@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" href="formtest.css" />
+<script type="text/javascript" src="jquery.js"></script>
+<style rel="stylesheet" type="text/css">
+body{margin: 0;padding: 0;font: 14px "Microsoft YaHei";}
+form,ul,li,div,p,span,input,textarea,select{margin: 0;padding: 0;list-style: none;}
+input,textarea,select{outline: none;}
+input,textarea{appearance: none;-webkit-appearance: none;border: none;}
+.wrap{width: 900px;margin: 100px auto;}
+li{position: relative;width: 50%;min-height: 40px;line-height: 40px;margin-bottom: 20px;}
+li span{display: inline-block;float: left;text-align: right;width: 62px;padding-right: 20px;}
+li input{height: 39px;line-height: 20px;width: 368px;border-bottom: 1px solid #ccc;}
+li .sex{width: 12px;height: 12px;border: 1px solid #eee;border-radius: 100%;margin-right: 5px;vertical-align: middle; cursor: pointer;}
+li .sex:checked{background: #999;}
+li label{margin-right: 15px;cursor: pointer;}
+li select{float: left;width: 64px;height: 24px;margin-top: 8px;margin-right: 5px;}
+li i{float: left;font-style: normal;margin-right: 20px;}
+li .taste{width: 20px;height: 20px;border: 1px solid #eee;border-radius: 4px;margin-right: 10px;vertical-align: middle;}
+li .taste:checked{background: #ccc;}
+textarea{width: 300px;height: 120px;line-height: 20px;border: 1px solid #ddd;padding: 10px;resize: none;}
+</style>
+</head>
+<body>
+<div class="wrap" id="form-test">
+	<ul>
+		<li class="form-item"><span>姓名</span><input type="text" name="fullname" category="姓名" required /></li>
+		<li class="form-item"><span>用户名</span><input type="text" name="username" category="用户名" required /></li>
+		<li class="form-item"><span>性别</span><input type="radio" name="sex" class="sex" id="men" value="男" checked><label for="men">男</label><input type="radio" name="sex" class="sex" id="women" value="女"><label for="women">女</label></li>
+		<li class="form-item"><span>密码</span><input type="password" name="password" category="密码" required /></li>
+		<li class="form-item"><span>手机</span><input type="tel" name="mobile" category="手机号" maxlength="11" required /></li>
+		<li class="form-item"><span>邮箱</span><input type="email" name="email" /></li>
+		<li class="form-item"><span>身份证</span><input type="text" name="idCard" /></li>
+		<li class="form-item"><span>兴趣</span><input type="checkbox" name="taste" class="taste" value="乒乓球"><input type="checkbox" name="taste" class="taste" value="羽毛球"><input type="checkbox" name="taste" class="taste" value="篮球"></li>
+		<li>
+			<span>出生日期</span>
+			<select name="" id="" style="width: 80px;" required >
+				<option value=""></option>
+				<option value="">1990</option>
+				<option value="">1991</option>
+				<option value="">1992</option>
+			</select>
+			<i>年</i>
+			<select name="" id="">
+				<option value=""></option>
+				<option value="">1</option>
+				<option value="">2</option>
+				<option value="">3</option>
+			</select>
+			<i>月</i>
+			<select name="" id="">
+				<option value=""></option>
+				<option value="">1</option>
+				<option value="">2</option>
+				<option value="">3</option>
+			</select>
+			<i>日</i>
+		</li>
+		<li><span>其它</span><textarea id="" cols="30" rows="10"></textarea></li>
+		<li><button id="form-sub">提交</button></li>
+	</ul>
+</div>
+<script type="text/javascript" src="formtest.js"></script>
+<script type="text/javascript">
+$(function(){
+	new formtest({
+		enterType: true,
+		callback: function(){
+			console.log('success');
+		}
+	});
+});
+</script>
+</body>
+</html>

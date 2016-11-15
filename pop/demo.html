@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="pop.js"></script>
+<link rel="stylesheet" href="pop.css">
+<style rel="stylesheet" type="text/css">
+body,div,ul,li,h1,p,span,button{margin: 0;padding: 0;font: 14px "Microsoft YaHei";border: none;}
+ul,li{list-style: none;}
+body{background: #fafafa;}
+ul{width: 90%;height: auto;margin: 50px auto;}
+li{width: 100%;height: auto;margin-bottom: 15px;background: #fff;border-radius: 5px;box-shadow: 0 0 5px rgba(0,0,0,.1);}
+h1{font-size: 18px;text-indent: 30px;line-height: 40px;}
+ul p{color: #555;text-align: center;line-height: 40px;}
+ul div{position: relative;padding: 0 30px;line-height: 40px;}
+button{position: absolute;right: 30px;top: 8px;color: #fff;font-size: 15px;width: 60px;height: 24px;line-height: 24px;border-radius: 3px;background: #f50;cursor: pointer;}
+</style>
+</head>
+<body>
+<ul>
+	<li>
+		<h1>title</h1>
+		<p>content</p>
+		<div><span>time</span><button>删除</button></div>
+	</li>
+	<li>
+		<h1>title</h1>
+		<p>content</p>
+		<div><span>time</span><button>删除</button></div>
+	</li>
+	<li>
+		<h1>title</h1>
+		<p>content</p>
+		<div><span>time</span><button>删除</button></div>
+	</li>
+</ul>
+</div>
+<script type="text/javascript">
+var btn = document.getElementsByTagName('button');
+for(var i=0;i<btn.length;i++){
+	(function(){
+		return btn[i].onclick = function(){
+			var that = $(this).parents('li');
+			pop({
+				type:'confirm',
+				//content:"是否确定要删除项目",
+				bg: 'grey',
+				width: '400px',
+				callback: function(){
+					that.remove();
+					pop({
+						type:"tip",
+						content:"删除成功"
+					});
+				}
+			});
+		}
+	})();
+}
+</script>
+</body>
+</html>

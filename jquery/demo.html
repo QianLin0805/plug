@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script type="text/javascript" src="base.js"></script>
+<style rel="stylesheet" type="text/css">
+body{margin: 0;padding: 0;font: 14px "Microsoft YaHei";background: #fff;line-height: 40px;}
+body,div,header,p,input,a{margin: 0;padding: 0;}
+header{display: block;height: 40px;}
+header *{width: 100px;float: left;}
+.pox{position: absolute;left: 50px;top: 50px;width: 100px;height: 100px;background: #ccc;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.mask{width: 100%;position: fixed;left: 0;top: 0;bottom: 0;z-index: 111;background: rgba(0,0,0,0.5);display: none;}
+.box{padding: 10px;width: 300px;height: 300px;line-height: 20px;overflow: hidden;background: #fff;position: absolute;z-index: 2;cursor: pointer;}
+input{width: 200px;height: 40px;outline: none;}
+</style>
+</head>
+<body>
+    <div class="pox" id="pox" title="abc">abasdfasefegadsfasdfasegfsegc</div>
+    <div class="mask">
+        <div class="box" id="box">
+            <input type="text" />
+            <p class="close">关闭</p>
+        </div>
+    </div>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+
+var a = '<div class="pox" id="pox" title="abc" style="background:#ccc;">abasdfasefegadsfasdfasegfsegc</div>'
+//alert(a.replace(/<[^>]+>/g,'').replace(/&nbsp;/g,''))
+
+</script>
+<script type="text/javascript">
+for(var i=0;i<Math.ceil(150/12.5);i++){
+    console.log(Math.cos( 12.5*i/150 * Math.PI ) / 2);
+}
+
+window.onload = function(){
+    function animate(obj,time,type){
+        var attr = [];           //要变换的属性
+        var start = [];          //起点
+        var direc = [];          //动画的方向
+        var speed = [];          //速度
+        var distance = [];       //不断变化的值
+        var dest = [];           //终点
+        for(var x in obj){
+            var begin = parseFloat($('.pox').css(x))?parseFloat($('.pox').css(x)):0;
+            var end = parseFloat(obj[x]);
+            attr.push(x);
+            start.push(begin);
+            direc.push((end-begin)>0?1:-1);
+            speed.push(25*(end - begin)/time);
+            distance.push(begin);
+            dest.push(end);
+        }
+        console.log(attr.length);
+        for(var i=0;i<attr.length;i++){
+            console.log(speed[i]);
+            (function(i){
+                return setTimeout(function change(){
+                    distance[i] += speed[i];
+                    if(direc[i] == 1){
+                        if(distance[i] - speed[i] < dest[i]){
+                            $('.pox').css(attr[i],distance[i]+'px');
+                            setTimeout(change,25);
+                        }
+                    }else if(direc[i] == -1){
+                        if(distance[i] - speed[i] > dest[i]){
+                            $('.pox').css(attr[i],distance[i]+'px');
+                            setTimeout(change,25);
+                        }
+                    }
+                },25);
+            })(i);
+        }
+    }
+    $('.pox').click(function(){
+        animate({"left":"150px","top":"200px"},300,'swing');
+    });
+
+    function center(){
+        var pk = document.documentElement.clientWidth;
+        var pg = document.documentElement.clientHeight;
+        var left = $('.box').width();
+        var height = $('.box').height();
+        $('.box').css({
+            "left":(pk-left)/2+'px',
+            "top":(pg-height)/2+'px'
+        });
+    };
+    center();
+    window.onresize = function(){
+        center();
+    }
+    /*addEvent(getClassEl('box')[0],"mousedown",function(event){
+        var e = event || window.event;
+        var target = e.target || e.srcElement;
+        var pk = document.documentElement.clientWidth;
+        var pg = document.documentElement.clientHeight;
+        var disX = e.clientX - $(this).offset().left;
+        var disY = e.clientY - $(this).offset().top;
+        var elWidth = $(this).width();
+        var elHeight = $(this).height();
+        var x,y;
+        if(getClassEl('box')[0].setCapture){
+            getClassEl('box')[0].setCapture();
+        }else if(window.captureEvents){
+            window.captureEvents(e.MOUSEMOVE | e.MOUSEUP);
+        }
+        function move(event){
+            var e = event || evObj(window.event);
+            x = e.clientX - disX;
+            y = e.clientY - disY;
+            if(x<0){
+                x = 0;
+            }else if(x>pk-elWidth){
+                x = pk-elWidth;
+            }
+            if(y<0){
+                y = 0;
+            }else if(y>pg-elHeight){
+                y = pg-elHeight;
+            }
+            $('.box').css({
+                "left":x+'px',
+                "top":y+'px'
+            });
+            e.preventDefault();
+        }
+        if(target.tagName!='INPUT'&&target.className!="close"){
+            addEvent(document,"mousemove",move);
+            addEvent(document,"mouseup",function up(){
+                if(getClassEl('box')[0].releaseCapture){
+                    getClassEl('box')[0].releaseCapture();
+                }else if(window.captureEvents){
+                    window.captureEvents(e.MOUSEMOVE | e.MOUSEUP);
+                }
+                removeEvent(document,"mousemove",move);
+                removeEvent(document,"mousemove",up);
+            });
+        }
+    });
+    addEvent(getClassEl('pox')[0],'click',function(event){
+        $('.mask').show();
+        center();
+        $('html').css('overflow','hidden');
+    });*/
+    $('.close').click(function(){
+        $('.mask').hide();
+        $('html').css('overflow','');
+    });
+}
+</script>
