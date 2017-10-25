@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>倒计时效果</title>
+</head>
+<body>  
+<h2>离双十一活动结束还有:</h2> 
+<div id="timer"></div>
+<script language="javascript" type="text/javascript">
+function setTimer(el, endtime, starttime){
+	var date = new Date(endtime);                               //目标时间
+	var now = starttime ? new Date(starttime) : new Date();
+	var diff = ( Date.parse(date) - Date.parse(now) ) / 1000;   //时间差
+
+	function getTimeShow(){                                     //显示时间
+		var d = Math.floor(diff / (24 * 60 * 60));
+		var d = Math.floor(diff / (24 * 60 * 60));              //天
+		var h = diff % (24 * 60 * 60);                          //小时
+		var m = h % (60 * 60);                                  //分
+		var s = m % 60;                                         //秒
+		h = Math.floor(h / (60 * 60));                          //最终小时
+		m = Math.floor(m / 60);                                 //最终分钟
+		return d + "天" + h + "小时" + m + "分" + s + "秒";
+	}
+
+	if(diff > 0){
+		el.innerHTML = getTimeShow();
+		var timer = setInterval(function(){
+			if(diff <= 0) return;
+			diff -= 1;
+			el.innerHTML = getTimeShow();
+		},1000);
+	}
+}
+
+var container = document.querySelector('#timer');
+setTimer(container, "11 12,2017 00:00:00");
+
+</script>
+</body>
+</html>
